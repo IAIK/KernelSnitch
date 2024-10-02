@@ -1,0 +1,11 @@
+*.csv
+*.elf
+*.ko
+*.mod
+*.o
+*.d
+*.order
+*.cmd
+*.symvers
+*.mod.c
+.vscode
