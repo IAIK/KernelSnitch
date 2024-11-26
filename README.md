@@ -16,7 +16,7 @@ The artifacts do not perform any destructive steps, as we only show the timing s
 
 ### How to Access
 
-We provide the source code ([github](https://github.com/IAIK/KernelSnitch/tree/artifact-evaluation)) for performing the timing side channel.
+We provide the source code ([github](https://github.com/IAIK/KernelSnitch/)) for performing the timing side channel.
 
 ### Hardware Dependencies
 
@@ -34,10 +34,11 @@ One part for the artifact evaluation is to insert a kernel module, which require
 
 The installation required to perform the artifact evaluation works as following:
 
- - Clone our [github repository](https://github.com/IAIK/KernelSnitch/tree/artifact-evaluation) to the `/repo/path` directory.
+ - Clone our [github repository](https://github.com/IAIK/KernelSnitch/) to the `/repo/path` directory.
  - Change directory to `/repo/path/modules`.
  - Execute `make init` to build and insert the kernel module.
  - Change directory to `/repo/path`.
+ - Select in `/repo/path/cacheutils.h` either the `INTEL` or `AMD` macro depending on your system.
  - Execute `make` to build all experiment binaries.
 
 ### Basic Tests
