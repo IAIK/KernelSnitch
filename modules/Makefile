@@ -16,7 +16,7 @@ remove:
 	sudo rmmod helper.ko
 
 modules:
-	make -C /lib/modules/$(KVERSION)/build M=$(PWD) modules
+	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) modules
 
 clean:
-	make -C /lib/modules/$(KVERSION)/build M=$(PWD) clean
+	make -C /lib/modules/$(KVERSION)/build M=$(shell pwd) clean
