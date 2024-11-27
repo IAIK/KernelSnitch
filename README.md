@@ -6,13 +6,13 @@ This repo contains artifacts developed during a research project, as well as the
 
 KernelSnitch is a novel software-induced side-channel attack that targets kernel data container structures such as hash tables and trees. These structures vary in size and access time depending on the number of elements they hold, i.e., the occupancy level. KernelSnitch exploits this variability to constitute a timing side channel that is exploitable to an unprivileged, isolated attacker from user space. Despite the small timing differences relative to system call runtime, we demonstrate methods to reliably amplify these timing variations for successful exploitation.
 
-The artifacts demonstrate the timing side channel and show the practicality of distinguishing between different occupancy levels. We provide a kernel module and execution scripts for evaluation. While our timing side channel is software induced, we recommend to evaluate on hardware similar to ours (i.e., Intel i7-1260P, i7-1165G7, i7-12700, and Xeon Gold 6530) to reproduce similar results as in our paper. While the attacks should work on Linux kernels between v5.15 and v6.8, we recommend to evaluate the artifacts on v5.15 or v6.8, as these are the versions we primarily evaluate. For the timing side channel, the evaluation shows that the occupancy level of data container structures can be leaked by measuring the timing of syscalls that access these structures.
+The artifacts demonstrate the timing side channel and show the practicality of distinguishing between different occupancy levels. We provide a kernel module and execution scripts for evaluation. While our timing side channel is software induced, we recommend evaluation on hardware similar to ours (i.e., Intel i7-1260P, i7-1165G7, i7-12700, and Xeon Gold 6530) to reproduce similar results as in our paper. While the attacks should work generically on Linux kernels, we recommend to evaluate the artifacts on downstream Ubuntu Linux kernels v5.15, v6.5, or v6.8, as these are the versions we primarily evaluate. For the timing side channel, the evaluation shows that the occupancy level of data container structures can be leaked by measuring the timing of syscalls that access these structures.
 
 ## Description & Requirements
 
 ### Security, Privacy, and Ethical Concerns
 
-The artifacts do not perform any destructive steps, as we only show the timing side channel to leak the occupancy level of data container structures and exclude the case studies, i.e. secretly transmitting data via a covert channel, leaking kernel heap pointers and monitoring user activity via website fingerprinting.
+The artifacts do not perform any destructive steps, as we only show the timing side channel to leak the occupancy level of data container structures and exclude the case studies, i.e., secretly transmitting data via a covert channel, leaking kernel heap pointers and monitoring user activity via website fingerprinting.
 
 ### How to Access
 
@@ -24,9 +24,9 @@ While the timing side channel is software induced, one of the amplification meth
 
 ### Software Dependencies
 
-A system running with Linux kernel v5.15 to v6.8. As a reference, our primary evaluation system is Ubuntu 22.04 with generic kernels v5.15 or v6.8.
+While the attacks should generically work on Linux kernels, we recommend evaluating the artifacts on a downstream Ubuntu Linux kernel v5.15, v6.5, or v6.8. For reference, our primary evaluation system was Ubuntu 22.04 with generic kernels v5.15, v6.5, or v6.8.
 
-One part for the artifact evaluation is to insert a kernel module, which requires root privileges. This module is required to obtain the ground truth of the occupancy level of kernel data structures.
+One part of the artifact evaluation is to insert a kernel module that requires *root privileges*. This module is required to obtain the ground truth of the occupancy level of kernel data structures. We tested our kernel module with the downstream Ubuntu Linux kernels v5.15, v6.5, and v6.8. For other kernels that have different config files (or other downstream changes) our implemented module may not do what we intended. Specifically, in order to obtain the occupancy ground truth of the data structures, we redefined and reimplemented several structures and functions according to how they are implemented in the Ubuntu Linux kernel. We did this because several functions used to access kernel data structures are implemented as inline functions, e.g., `__rhashtable_lookup`, which prevented us from calling these functions directly. Another reason is that several structs, e.g., `msg_queue`, are defined in c files, which also prevents us from using these struct definitions.
 
 ## Artifact Installation & Configuration
 
