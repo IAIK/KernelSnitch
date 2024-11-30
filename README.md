@@ -1,6 +1,6 @@
 # KernelSnitch Artifacts
 
-This repo contains artifacts developed during a research project, as well as the code to perform KernelSnitch.
+This repo contains artifacts developed during a research project, as well as the code to perform KernelSnitch, which got accepted at NDSS '25.
 
 ## What is KernelSnitch
 
